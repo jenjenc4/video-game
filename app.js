@@ -6,13 +6,19 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors=require('cors');
+
+const db=require('./data/mongo');
 //modules of code that i can changes
-const indexRouter = require('./routes/index');
+//const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const videoGamesRouter = require('./routes/api/video-games')
 
 const app = express();
 
-// view engine setup
+//one db connection & if my app wont load, db wont either.
+db.connect(app.locals)
+.then(() =>{
+  // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 //setting up middleware & using cors
@@ -23,9 +29,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
+//app.use('/', indexRouter);
 app.use('/users', usersRouter);
-
+app.use('/v1/video-games', videoGamesRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
@@ -41,5 +47,12 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+
+  process.on('SIGINT', () => {
+    db.close()
+    process.exit()
+  })
+})
 
 module.exports = app;
