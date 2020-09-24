@@ -85,7 +85,7 @@ class CreateVideoGame extends React.Component {
             <option value="pc">PC</option>
           </select>
           <input
-            className="del-consoles"
+            className="del-btn"
             type="button"
             value="x"
             onClick={() => this.removeConsole(index)}
