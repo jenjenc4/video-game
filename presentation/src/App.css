@@ -57,3 +57,10 @@ color: black;
 width: 30px;
 margin-left: 2vw;
 }
+
+.edit {
+  background-color: green;
+  color: white;
+  width: 60 px;
+  margin-left: 2vw;
+}
