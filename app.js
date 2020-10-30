@@ -11,7 +11,7 @@ const db=require('./data/mongo');
 //modules of code that i can changes
 //const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
-const videoGamesRouter = require('./routes/api/video-games')
+const lessonsRouter = require('./routes/api/lessons')
 
 const app = express();
 
@@ -31,7 +31,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/v1/video-games', videoGamesRouter);
+app.use('/v1/lessons', lessonsRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

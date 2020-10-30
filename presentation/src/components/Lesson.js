@@ -1,28 +1,28 @@
 import React, { useState } from 'react'
-import UpdateVideoGame from './UpdateVideoGame';
+import UpdateLesson from './UpdateLesson';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
-const VideoGame = ({ game, refresh }) => {
+const Lesson = ({ lesson, refresh }) => {
     const[open, setOpen] = useState(false);
-    const deleteGame= () => {
-        fetch(`${API_URL}/video-games/${game._id}`, {
+    const deleteLesson= () => {
+        fetch(`${API_URL}/lessons/${lesson._id}`, {
             method: "DELETE"
         }) .then(refresh)
     }
     const toggleOpen = () =>setOpen(!open);
     const displayUpdate = open ? 
     <fieldset>
-        <UpdateVideoGame game={game} refresh={refresh} close={toggleOpen} /> 
+        <UpdateLesson lesson={lesson} refresh={refresh} close={toggleOpen} /> 
 
     </fieldset> :
     '' ;
 
         return (
             <div>
-             <span>{game.name}</span> 
+             <span>{lesson.name}</span> 
              <button className="edit" onClick={toggleOpen}>Edit</button>
-             <button className="del-btned" onClick={deleteGame}>X</button>
+             <button className="del-btned" onClick={deleteLesson}>X</button>
             {displayUpdate}
             </div>
         );
@@ -31,4 +31,4 @@ const VideoGame = ({ game, refresh }) => {
 
 
 
-export default VideoGame;
+export default Lesson;

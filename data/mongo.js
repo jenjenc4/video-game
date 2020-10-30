@@ -12,7 +12,7 @@ function connect(locals) {
 
     return client.connect()
         .then((connection) => {
-            locals.collectionVideoGames = connection.db('games').collection('video-games');
+            locals.collectionLessons = connection.db('STEAMIE').collection('lessons');
             
         })
         .catch(err => {

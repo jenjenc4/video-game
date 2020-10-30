@@ -6,12 +6,12 @@ const db= require('../../data/mongo');
 router.get('/', function(req, res, next) {
   const info = {
       query:{},
-      collection: req.app.locals.collectionVideoGames
+      collection: req.app.locals.collectionLessons
   }
 
 db.readAll(info)
-    .then((videoGames) => {
-        res.json(videoGames);
+    .then((lessons) => {
+        res.json(lessons);
     })
     .catch(err=> {
         console.log(err);
@@ -21,7 +21,7 @@ db.readAll(info)
 router.post('/', function(req,res,next) {
     const info ={
         doc: req.body,
-        collection: req.app.locals.collectionVideoGames
+        collection: req.app.locals.collectionLessons
     }
     db.createOne(info)
     .then((data) => {
@@ -34,7 +34,7 @@ router.post('/', function(req,res,next) {
 router.delete('/:id', function(req,res,next) {
     const info ={
         id: req.params.id,
-        collection: req.app.locals.collectionVideoGames
+        collection: req.app.locals.collectionLessons
     }
     db.deleteOne(info)
     .then((data) => {
@@ -48,7 +48,7 @@ router.put('/:id', function(req,res,next) {
     const info ={
         id: req.params.id,
         doc:req.body,
-        collection: req.app.locals.collectionVideoGames
+        collection: req.app.locals.collectionLessons
     }
     db.replaceOne(info)
     .then((data) => {
